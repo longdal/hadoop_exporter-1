@@ -205,7 +205,9 @@ class ResourceManagerMetricCollector(MetricCol):
             if 'RMNMInfo' in beans[i]['name']:
                 self._get_rmnminfo_metrics(beans[i])
                     
-            if 'QueueMetrics' in beans[i]['name'] and 'root' == beans[i]['tag.Queue']:
+#            if 'QueueMetrics' in beans[i]['name'] and 'root' == beans[i]['tag.Queue']:
+
+            if 'QueueMetrics' in beans[i]['name']:
                 self._get_queue_metrics(beans[i])
                     
             if 'ClusterMetrics' in beans[i]['name']:
@@ -224,7 +226,7 @@ def main():
         # print("Polling %s. Serving at port: %s" % (args.address, port))
         print("Polling %s. Serving at port: %s" % (args.address, port))
         while True:
-            time.sleep(1)
+            time.sleep(300)
     except KeyboardInterrupt:
         print(" Interrupted")
         exit(0)

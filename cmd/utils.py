@@ -182,7 +182,7 @@ def parse_args():
     )
     parser.add_argument(
         '-s','--services-api',
-        required = True,
+        required = False,
         metavar = 'services_api',
         help = 'Services api to scrape each hadoop jmx url. (default "127.0.0.1:9035")',
         default = '127.0.0.1:9035'
@@ -192,70 +192,70 @@ def parse_args():
         required=False,
         metavar='namenode_jmx_url',
         help='Hadoop hdfs metrics URL. (default "http://indata-10-110-13-115.indata.com:50070/jmx")',
-        default="http://indata-10-110-13-115.indata.com:50070/jmx"
+        default=""
     )
     parser.add_argument(
         '-rm', '--resourcemanager-url',
         required=False,
         metavar='resourcemanager_jmx_url',
         help='Hadoop resourcemanager metrics URL. (default "http://indata-10-110-13-116.indata.com:8088/jmx")',
-        default="http://indata-10-110-13-116.indata.com:8088/jmx"
+        default=""
     )
     parser.add_argument(
         '-dn', '--datanode-url',
         required=False,
         metavar='datanode_jmx_url',
         help='Hadoop datanode metrics URL. (default "http://indata-10-110-13-114.indata.com:1022/jmx")',
-        default="http://indata-10-110-13-114.indata.com:1022/jmx"
+        default=""
     )
     parser.add_argument(
         '-jn', '--journalnode-url',
         required=False,
         metavar='journalnode_jmx_url',
         help='Hadoop journalnode metrics URL. (default "http://indata-10-110-13-114.indata.com:8480/jmx")',
-        default="http://indata-10-110-13-114.indata.com:8480/jmx"
+        default=""
     )
     parser.add_argument(
         '-mr', '--mapreduce2-url',
         required=False,
         metavar='mapreduce2_jmx_url',
         help='Hadoop mapreduce2 metrics URL. (default "http://indata-10-110-13-116.indata.com:19888/jmx")',
-        default="http://indata-10-110-13-116.indata.com:19888/jmx"
+        default=""
     )
     parser.add_argument(
         '-nm', '--nodemanager-url',
         required=False,
         metavar='nodemanager_jmx_url',
         help='Hadoop nodemanager metrics URL. (default "http://indata-10-110-13-114.indata.com:8042/jmx")',
-        default="http://indata-10-110-13-114.indata.com:8042/jmx"
+        default=""
     )
     parser.add_argument(
         '-hbase', '--hbase-url',
         required=False,
         metavar='hbase_jmx_url',
         help='Hadoop hbase metrics URL. (default "http://indata-10-110-13-115.indata.com:16010/jmx")',
-        default="http://indata-10-110-13-115.indata.com:16010/jmx"
+        default=""
     )
     parser.add_argument(
         '-rs', '--regionserver-url',
         required=False,
         metavar='regionserver_jmx_url',
         help='Hadoop regionserver metrics URL. (default "http://indata-10-110-13-114.indata.com:60030/jmx")',
-        default="http://indata-10-110-13-114.indata.com:60030/jmx"
+        default=""
     )
     parser.add_argument(
         '-hive', '--hive-url',
         required=False,
         metavar='hive_jmx_url',
         help='Hadoop hive metrics URL. (default "http://indata-10-110-13-116.indata.com:10502/jmx")',
-        default="http://indata-10-110-13-116.indata.com:10502/jmx"
+        default=""
     )
     parser.add_argument(
         '-ld', '--llapdaemon-url',
         required=False,
         metavar='llapdaemon_jmx_url',
         help='Hadoop llapdaemon metrics URL. (default "http://indata-10-110-13-116.indata.com:15002/jmx")',
-        default="http://indata-10-110-13-116.indata.com:15002/jmx"
+        default=""
     )
     parser.add_argument(
         '-p','--path',

@@ -5,7 +5,7 @@ import yaml
 import re
 import time
 from sys import exit
-from prometheus_client import start_http_server
+from prometheus_client import start_http_server, Summary
 from prometheus_client.core import GaugeMetricFamily, HistogramMetricFamily, REGISTRY
 
 from consul import Consul
@@ -32,6 +32,20 @@ def register_consul(address, port):
     # print("Polling %s. Serving at port: %s" % (args.address, port))
     print "Polling %s. Serving at port: %s" % (address, port)
 
+def register_prometheus_arg(args):
+    clusterstr= args.cluster
+    print '[cluster]' + clusterstr
+    for k, value in args._get_kwargs():
+        if value :
+            print(k+':'+str(value))
+            if  k == 'namenode_url' : 
+                REGISTRY.register(NameNodeMetricCollector(clusterstr, value)) 
+                print  "register>>"+clusterstr+">>"+str(value)
+                continue
+            if k == 'resourcemanager_url' :
+                REGISTRY.register(ResourceManagerMetricCollector(clusterstr, value))
+                print  "register>>"+clusterstr+">>"+str(value)
+                continue
 
 def register_prometheus(rest_url):
     try:
@@ -125,6 +139,13 @@ def register_prometheus(rest_url):
         logger.info("Error in register prometheus, msg: {0}".format(e))
         pass
 
+REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
+# Decorate function with metric.
+@REQUEST_TIME.time()
+def process_request(t):
+    """A dummy function that takes some time."""
+    time.sleep(t)
+
 def main():
     try:
         args = utils.parse_args()
@@ -132,7 +153,8 @@ def main():
         port = int(args.port)
         rest_url = args.services_api
         register_consul(address, port)
-        register_prometheus(rest_url)
+        register_prometheus_arg(args)
+        #register_prometheus(rest_url)
     except Exception as e:
         logger.info('Error happened, msg: %s'%e)
     else:
@@ -140,3 +162,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+    while True:
+        process_request(1000)
+       
